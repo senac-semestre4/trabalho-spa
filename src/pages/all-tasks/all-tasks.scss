@@ -1,0 +1,56 @@
+page-all-tasks {
+    table{
+        width: 100%;
+        tr{
+            th, td{
+                padding: 10px;
+                text-align: center;
+                &:first-of-type{
+                    width: 20%;
+                    text-align: center;
+                }
+                &:nth-of-type(2){
+                    width: 30%;
+                    text-align: center;
+                }
+                &:last-of-type{
+                    text-align: right;
+                }
+            }
+            th{
+                color: #8c8c8c;
+                font-weight: 400;
+                text-transform: uppercase;
+            }
+            td{
+                color: #727272;
+                div.circulo-data{
+                    border-radius: 50%;
+                    padding: 5px 0px;
+                    width: 80px;
+                    height: 80px;
+                    color: #fff;
+                    background: #727272;
+                    span{
+                        display: block;
+                        &:nth-of-type(2){
+                            font-size: 33px;
+                            font-weight: bold;
+                        }
+                    }
+                }
+                .tarefa-feita{
+                    background: #98aa35 !important;
+                }
+                .tarefa-atrasada{
+                    background: #ea654f !important;
+                }
+            }
+        }
+        tbody{
+            tr{
+                border-bottom: 1px solid #efefef;
+            }
+        }
+    }
+}

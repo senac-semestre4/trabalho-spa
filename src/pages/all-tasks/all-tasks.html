@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Tarefas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!--s
+  <ion-grid>
+      <ion-row>
+          <ion-col col-2>
+            <ion-checkbox checked="false"></ion-checkbox>
+          </ion-col>
+          <ion-col col-6>
+            Tarefa criada pelo usuário
+          </ion-col>
+          <ion-col col-4>
+            29/10/2017
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+ -->
+  <table>
+    <thead>
+      <tr>
+        <th>Feito</th>
+        <th>Prazo</th>
+        <th>Tarefa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><ion-checkbox checked="false"></ion-checkbox></td>
+        <td>
+          <div class="circulo-data">
+              <span>Out</span>
+              <span>29</span>
+              <span>2017</span>
+          </div>
+        </td>
+        <td>Tarefa criada pelo usuário</td>
+      </tr>
+      <tr>
+          <td><ion-checkbox checked="false"></ion-checkbox></td>
+          <td>
+            <div class="circulo-data">
+                <span>Out</span>
+                <span>30</span>
+                <span>2017</span>
+            </div>
+          </td>
+          <td>Tarefa criada pelo usuário</td>
+        </tr>
+        <tr>
+          <td><ion-checkbox checked="false"></ion-checkbox></td>
+          <td>
+            <div class="circulo-data tarefa-feita">
+                <span>Out</span>
+                <span>21</span>
+                <span>2017</span>
+            </div>
+          </td>
+          <td>Tarefa criada pelo usuário</td>
+        </tr>
+    </tbody>
+  </table>
+</ion-content>
