@@ -11,4 +11,11 @@ export class AllTasksPage {
 
   }
 
+  filtroPorFeito(){
+    console.log("Filtro por feito");
+  }
+
+  filtroPorPrazo(){
+    console.log("Filtro por prazo");
+  }
 }
