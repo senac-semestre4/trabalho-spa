@@ -28,7 +28,7 @@ export class AllTasksPage {
 
   filtroPorFeito(){
     this.tipoFiltro = 'feito';
-   console.log( this.verificaDataAtrasada("30/10/2017"));
+    console.log("Filtro por feito");
   }
 
   filtroPorPrazo(){
