@@ -59,9 +59,10 @@ page-all-tasks {
                     width: 80px;
                     height: 80px;
                     color: #fff;
-                    background: #727272;
+                    background: #98aa35;
                     span{
                         display: block;
+                        text-transform: uppercase;
                         &:nth-of-type(2){
                             font-size: 33px;
                             font-weight: bold;
@@ -69,7 +70,7 @@ page-all-tasks {
                     }
                 }
                 .tarefa-feita{
-                    background: #98aa35 !important;
+                    background: #727272 !important;
                 }
                 .tarefa-atrasada{
                     background: #ea654f !important;
@@ -82,4 +83,7 @@ page-all-tasks {
             }
         }
     }
+}
+.line-through{
+    text-decoration: line-through;
 }

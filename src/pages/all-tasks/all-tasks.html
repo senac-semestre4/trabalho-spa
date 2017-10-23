@@ -30,62 +30,28 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><ion-checkbox checked="false"></ion-checkbox></td>
+      <tr *ngFor="let task of tasks">
+        <td><ion-checkbox [checked]="task.status"></ion-checkbox></td>
         <td>
-          <div class="circulo-data tarefa-atrasada">
-              <span>Out</span>
-              <span>22</span>
-              <span>2017</span>
-          </div>
-        </td>
-        <td>Tarefa criada pelo usuário</td>
-      </tr>
-      <tr>
-          <td><ion-checkbox checked="false"></ion-checkbox></td>
-          <td>
-            <div class="circulo-data">
-                <span>Out</span>
-                <span>30</span>
-                <span>2017</span>
-            </div>
-          </td>
-          <td>Tarefa criada pelo usuário</td>
-        </tr>
-        <tr>
-          <td><ion-checkbox checked="false"></ion-checkbox></td>
-          <td>
-            <div class="circulo-data tarefa-feita">
-                <span>Out</span>
-                <span>21</span>
-                <span>2017</span>
-            </div>
-          </td>
-          <td>Tarefa criada pelo usuário</td>
-        </tr>
-        <tr>
-          <td><ion-checkbox checked="false"></ion-checkbox></td>
-          <td>
-            <div class="circulo-data tarefa-feita">
-                <span>set</span>
-                <span>20</span>
-                <span>2017</span>
-            </div>
-          </td>
-          <td>Tarefa criada pelo usuário</td>
-        </tr>
-        <tr>
-          <td><ion-checkbox checked="false"></ion-checkbox></td>
-          <td>
+          <div></div>
+          <ng-container *ngIf="verificaDataAtrasada(task.data, task.status); else elseTemplate">
             <div class="circulo-data tarefa-atrasada">
-                <span>Set
-                </span>
-                <span>22</span>
-                <span>2017</span>
+              <span>{{ encontraMes(encontraData(this.task.data)[1]) }}</span>
+              <span>{{ encontraData(this.task.data)[0] }}</span>
+              <span>2017</span>
             </div>
-          </td>
-          <td>Tarefa criada pelo usuário</td>
-        </tr>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <div class="circulo-data" [ngClass]="{'tarefa-feita': task.status}">
+              <span>{{ encontraMes(encontraData(this.task.data)[1]) }}</span>
+              <span>{{ encontraData(this.task.data)[0] }}</span>
+              <span>2017</span>
+            </div>
+          </ng-template>
+          
+        </td>
+        <td [ngClass]="{'line-through': task.status}">{{ task.nome }}</td>
+      </tr>
     </tbody>
   </table>
 </ion-content>
