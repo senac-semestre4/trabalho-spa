@@ -1,6 +1,9 @@
 page-all-tasks {
     table{
         width: 100%;
+        thead{
+            background: #ea654f;
+        }
         tr{
             th, td{
                 text-align: center;
@@ -17,12 +20,12 @@ page-all-tasks {
                 }
             }
             th{
-                color: #8c8c8c;
+                color: #fff;
                 font-weight: 400;
                 text-transform: uppercase;
-                padding: 20px 5px;
+                padding: 30px 5px;
                 a{
-                    color: #8c8c8c;
+                    color: #fff;
                     text-decoration: none;
                     cursor: pointer;
                 }
@@ -32,10 +35,17 @@ page-all-tasks {
                     margin-left: 7px;
                     ion-icon{
                         position: absolute;
+                        font-weight: 400;
                         &:last-of-type{
                             right: 0;
                             top: 0;
                         }
+                    }
+                }
+                a.filtro-ativo{
+                    font-weight: bolder;
+                    ion-icon{
+                        font-weight: bolder;
                     }
                 }
             }

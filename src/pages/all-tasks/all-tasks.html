@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <th (click)="filtroPorFeito()">
-          <a href="#">
+          <a href="#" [ngClass]="{'filtro-ativo': tipoFiltro == 'feito'}">
             Feito 
             <div class="box-icon-filtro">
                 <ion-icon name="ios-arrow-round-down-outline"></ion-icon >
@@ -18,7 +18,7 @@
           </a>
         </th>
         <th (click)="filtroPorPrazo()">
-          <a href="#">
+          <a href="#" [ngClass]="{'filtro-ativo': tipoFiltro == 'prazo'}">
             Prazo
             <div class="box-icon-filtro">
               <ion-icon name="ios-arrow-round-down-outline"></ion-icon >

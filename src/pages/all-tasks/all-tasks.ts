@@ -7,15 +7,18 @@ import { NavController } from 'ionic-angular';
 })
 export class AllTasksPage {
 
+  private tipoFiltro : string;
   constructor(public navCtrl: NavController) {
 
   }
 
   filtroPorFeito(){
+    this.tipoFiltro = 'feito';
     console.log("Filtro por feito");
   }
 
   filtroPorPrazo(){
+    this.tipoFiltro = 'prazo';
     console.log("Filtro por prazo");
   }
 }
