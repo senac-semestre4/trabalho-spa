@@ -34,7 +34,7 @@
         <td><ion-checkbox [checked]="task.status"></ion-checkbox></td>
         <td>
           <div></div>
-          <ng-container *ngIf="verificaDataAtrasada(task.data, task.status); else elseTemplate">
+          <ng-container *ngIf="verificaDataAtrasada(converteData(task.data),task.status); else elseTemplate">
             <div class="circulo-data tarefa-atrasada">
               <span>{{ encontraMes(encontraData(this.task.data)[1]) }}</span>
               <span>{{ encontraData(this.task.data)[0] }}</span>
