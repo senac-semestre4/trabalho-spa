@@ -8,17 +8,23 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label stacked>Prazo</ion-label>
-    <ion-input type="date" placeholder="Prazo"></ion-input>
+      <ion-icon name="md-calendar" item-start></ion-icon>
+    <ion-label stacked>Prazo *</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" placeholder="DD/MM/AAAA" max="2030"></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-label stacked>Tarefa</ion-label>
-    <ion-input type="text"></ion-input>
+      <ion-icon name="ios-construct" item-start></ion-icon>
+    <ion-input type="text" placeholder="Tarefa *"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label stacked>Detalhes</ion-label>
-    <ion-textarea name="" id="" rows="5"></ion-textarea>
+    <ion-icon name="md-clipboard" item-start></ion-icon>
+    <ion-textarea name="" id="" rows="5" placeholder="Detalhes da tarefa"></ion-textarea>
   </ion-item>
+  <ion-item>
+      <ion-label class="lbl-tarefa-concluida">Tarefa concluida ?</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+      <button ion-button full>SALVAR</button>
 </ion-content>

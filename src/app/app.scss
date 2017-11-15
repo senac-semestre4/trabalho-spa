@@ -18,8 +18,12 @@
 ion-title{
     text-transform: uppercase;
     text-align: center; 
+    .toolbar-title-md,.toolbar-title-ios{
+        color: #fff;
+    }
 }
-.tabs-ios .tab-button:hover:not(.disable-hover), .tabs-ios .tab-button[aria-selected=true] {
-    color: #488aff;
-    border-top: 2px solid;
+.toolbar-background-md, .toolbar-background-ios{
+    border-color: #626f18;
+    background: #98aa35;
+    
 }

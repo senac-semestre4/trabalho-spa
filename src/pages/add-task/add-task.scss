@@ -1,3 +1,33 @@
 page-add-task {
-
+    ion-icon{
+        color: #b34b3a !important;
+    }
+    ion-datetime, ion-input, ion-textarea{
+        color: #b34b3a !important;
+    }
+    ion-datetime{
+        font-weight: bold;
+        font-size: 2.4rem;
+    }
+    .item-ios.item-block .item-inner{
+        border-bottom: 0.55px solid rgba(179, 75, 58, 0.41);
+    }
+    .checkbox-ios .checkbox-icon, .checkbox-md .checkbox-icon{
+        border-color: #b34b3a;
+        border-radius: 2px;
+    }
+    .checkbox-ios .checkbox-checked, .checkbox-md .checkbox-checked{
+        background: #5F1409;
+    }
+    ion-label{
+        color: #b34b3a !important;
+    }
+    .lbl-tarefa-concluida{
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 1.6rem;
+    }
+    .button-ios, .button-md{
+        background: #66731d;
+    }
 }

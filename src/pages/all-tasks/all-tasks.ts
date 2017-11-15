@@ -34,12 +34,11 @@ export class AllTasksPage implements OnInit{
   filtroPorFeito() {
     this.tipoFiltro = 'feito';
 
-    console.log("Filtro por feito");
     let cont = 0;
 
     // PEGA TODOS COM TRUE E ARMAZENA EM tasksOrdenado
     // POPULA O CONT
-    for (var i = 0; i < this.tasks.length; i++) {
+    for (let i = 0; i < this.tasks.length; i++) {
       if(this.tasks[i]['status']){
         this.tasksOrdenado[cont] = this.tasks[i];
         this.tasks[i] = null;
@@ -48,9 +47,9 @@ export class AllTasksPage implements OnInit{
     }
 
     // ORDENA VETOR AUX
-    for (var i = 0; i < this.tasksOrdenado.length; i++) {
+    for (let i = 0; i < this.tasksOrdenado.length; i++) {
       let aux;
-      for (var j = 0; j < this.tasksOrdenado.length; j++) {
+      for (let j = 0; j < this.tasksOrdenado.length; j++) {
         if (this.converteData(this.tasksOrdenado[i].data) < this.converteData(this.tasksOrdenado[j].data)) {
           aux = this.tasksOrdenado[i];
           this.tasksOrdenado[i] = this.tasksOrdenado[j];
@@ -59,9 +58,9 @@ export class AllTasksPage implements OnInit{
       }
     }
 
-    for (var i = 0; i < this.tasks.length; i++) {
+    for (let i = 0; i < this.tasks.length; i++) {
       let aux;
-      for (var j = 0; j < this.tasks.length; j++) {
+      for (let j = 0; j < this.tasks.length; j++) {
         if(this.tasks[i] != null && this.tasks[j] != null){
           if (this.converteData(this.tasks[i].data) < this.converteData(this.tasks[j].data)) {
             aux = this.tasks[i];
@@ -72,7 +71,7 @@ export class AllTasksPage implements OnInit{
       }
     }
 
-    for (var i = 0; i < this.tasks.length; i++) {
+    for (let i = 0; i < this.tasks.length; i++) {
       if(this.tasks[i] != null){
         this.tasksOrdenado[cont] = this.tasks[i];
         cont++;
@@ -87,11 +86,9 @@ export class AllTasksPage implements OnInit{
   filtroPorPrazo() {
     this.tipoFiltro = 'prazo';
 
-    console.log("Filtro por prazo");
-
-    for (var i = 0; i < this.tasks.length; i++) {
+    for (let i = 0; i < this.tasks.length; i++) {
       let aux;
-      for (var j = 0; j < this.tasks.length; j++) {
+      for (let j = 0; j < this.tasks.length; j++) {
         if (this.converteData(this.tasks[i].data) < this.converteData(this.tasks[j].data)) {
           aux = this.tasks[i];
           this.tasks[i] = this.tasks[j];
