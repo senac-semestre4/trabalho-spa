@@ -64,6 +64,9 @@ export class AddTaskPage {
         })
       });
     }
+    else{
+      this.templateCarregado = true;
+    }
   }
 
   
@@ -109,7 +112,7 @@ export class AddTaskPage {
     let retorno;
     let msg;
 
-    if (this.task.id > 0) {
+    if (this.task.id == 0) {
       
     } else {
       this.presentLoading('Por favor aguarde...', 'Tarefa criada com sucesso!.');
