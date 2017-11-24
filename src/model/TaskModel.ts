@@ -1,7 +1,8 @@
 export class TaskModel{
     id : number;
-    task : string;
-    deadline : Date;
-    objective : string;
+    nome : string;
+    dataPrazo : string;
+    horaPrazo : string;
+    objetivo : string;
     status : boolean;
 }

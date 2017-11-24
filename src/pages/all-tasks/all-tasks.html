@@ -5,15 +5,15 @@
 </ion-header>
 
 <ion-content>
-  <table>
+  <table *ngIf="tabelaCarregada">
     <thead>
       <tr>
         <th (click)="filtroPorFeito()">
           <a href="#" [ngClass]="{'filtro-ativo': tipoFiltro == 'feito'}">
-            Feito 
+            Feito
             <div class="box-icon-filtro">
-                <ion-icon name="ios-arrow-round-down-outline"></ion-icon >
-                <ion-icon name="ios-arrow-round-up-outline"></ion-icon>
+              <ion-icon name="ios-arrow-round-down-outline"></ion-icon>
+              <ion-icon name="ios-arrow-round-up-outline"></ion-icon>
             </div>
           </a>
         </th>
@@ -21,7 +21,7 @@
           <a href="#" [ngClass]="{'filtro-ativo': tipoFiltro == 'prazo'}">
             Prazo
             <div class="box-icon-filtro">
-              <ion-icon name="ios-arrow-round-down-outline"></ion-icon >
+              <ion-icon name="ios-arrow-round-down-outline"></ion-icon>
               <ion-icon name="ios-arrow-round-up-outline"></ion-icon>
             </div>
           </a>
@@ -30,25 +30,43 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let task of tasks">
-        <td><ion-checkbox [checked]="task.status"></ion-checkbox></td>
+      <tr *ngFor="let task of tasks" (click)="selecionaTarefa(task.id)">
+        <td>
+          <ion-checkbox [checked]="task.status" disabled></ion-checkbox>
+        </td>
         <td>
           <div></div>
-          <ng-container *ngIf="verificaDataAtrasada(converteData(task.data),task.status); else elseTemplate">
+          <ng-container *ngIf="verificaDataAtrasada(task.dataPrazo,task.status); else elseTemplate">
             <div class="circulo-data tarefa-atrasada">
-              <span>{{ encontraMes(encontraData(this.task.data)[1]) }}</span>
-              <span>{{ encontraData(this.task.data)[0] }}</span>
-              <span>2017</span>
+              <div class="dia">
+                <span>{{ encontraData(this.task.dataPrazo)[0] }}</span>
+              </div>
+              <div class="container-hora">
+                <span>{{ pegarHora(task.horaPrazo) }}</span>
+                <span>:</span>
+                <span>{{ pegarMinuto(task.horaPrazo) }}</span>
+              </div>
+              <div class="mes">
+                <span>{{ encontraMes(encontraData(this.task.dataPrazo)[1]) }}</span>
+              </div>
             </div>
           </ng-container>
           <ng-template #elseTemplate>
             <div class="circulo-data" [ngClass]="{'tarefa-feita': task.status}">
-              <span>{{ encontraMes(encontraData(this.task.data)[1]) }}</span>
-              <span>{{ encontraData(this.task.data)[0] }}</span>
-              <span>2017</span>
+              <div class="dia">
+                <span>{{ encontraData(this.task.dataPrazo)[0] }}</span>
+              </div>
+              <div class="container-hora">
+                <span>{{ pegarHora(task.horaPrazo) }}</span>
+                <span>:</span>
+                <span>{{ pegarMinuto(task.horaPrazo) }}</span>
+              </div>
+              <div class="mes">
+                <span>{{ encontraMes(encontraData(this.task.dataPrazo)[1]) }}</span>
+              </div>
             </div>
           </ng-template>
-          
+
         </td>
         <td [ngClass]="{'line-through': task.status}">{{ task.nome }}</td>
       </tr>

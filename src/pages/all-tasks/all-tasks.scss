@@ -1,8 +1,11 @@
+$bg-vermelho : #ea654f;
+$bg-cinza : #727272;
+$bg-verde : #98aa35;
 page-all-tasks {
     table{
         width: 100%;
         thead{
-            background: #ea654f;
+            background: darken($bg-vermelho, 10%);
         }
         tr{
             th, td{
@@ -52,28 +55,64 @@ page-all-tasks {
             td{
                 padding: 10px;
                 color: #727272;
-                div.circulo-data{
+                .circulo-data{
                     display: inline-block;
                     border-radius: 50%;
-                    padding: 5px 0px;
-                    width: 80px;
-                    height: 80px;
+                    width: 90px;
+                    height: 90px;
                     color: #fff;
-                    background: #98aa35;
+                    background: $bg-verde;
+                    padding: 10px 5px;
                     span{
-                        display: block;
                         text-transform: uppercase;
-                        &:nth-of-type(2){
-                            font-size: 33px;
-                            font-weight: bold;
+                        font-size: 1.4rem;
+                        font-weight: 100;
+                    }
+                    .dia, .mes{
+                        float: left;
+                        width: 100%;
+                    }
+                    .dia{
+                        span{
+                            border: 2px solid lighten($bg-verde, 20%);
+                            background: darken($bg-verde, 10%);
+                            border-radius: 50%;
+                            padding: 4px 5px;
+                            font-size: 1.4rem;
+                            margin-top: 3px;
                         }
+                    }
+                    div.container-hora{
+                        float: left;
+                        width: 100%;
+                        margin: 5px 0px 0px;
+                        span{
+                            font-weight: 900;
+                        }
+                        span:not(:nth-of-type(2)){
+                            display: inline-block;
+                            font-size: 2.6rem;
+                        }
+
                     }
                 }
                 .tarefa-feita{
-                    background: #727272 !important;
+                    background: $bg-cinza !important;
+                    .dia{
+                        span{
+                            border: 2px solid lighten($bg-cinza, 20%) !important;
+                            background: darken($bg-cinza, 10%) !important;
+                        }
+                    }
                 }
                 .tarefa-atrasada{
-                    background: #ea654f !important;
+                    background: $bg-vermelho !important;
+                    .dia{
+                        span{
+                            border: 2px solid lighten($bg-vermelho, 20%) !important;
+                            background: darken($bg-vermelho, 10%) !important;
+                        }
+                    }
                 }
             }
         }
@@ -86,4 +125,8 @@ page-all-tasks {
 }
 .line-through{
     text-decoration: line-through;
+}
+
+.checkbox-md.checkbox-disabled, .item-md.item-checkbox-disabled, .checkbox-ios.checkbox-disabled, .item-ios.item-checkbox-disabled{
+    opacity: 1;
 }

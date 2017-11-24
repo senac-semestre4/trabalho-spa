@@ -1,37 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController, ToastController, NavParams } from 'ionic-angular';
+import { TaskModel } from '../../model/TaskModel';
+import { Storage } from '@ionic/Storage'
+import { AddTaskPage } from '../add-task/add-task';
 @Component({
   selector: 'page-all-tasks',
   templateUrl: 'all-tasks.html'
 })
-export class AllTasksPage implements OnInit{
+export class AllTasksPage {
 
   private tipoFiltro: string;
-  private tasks =
-  [
-    { "id": 1, "nome": "Limpar Casa", "data": "20/08/2017", "status": true },
-    { "id": 2, "nome": "Fazer o PI", "data": "28/10/2017", "status": false },
-    { "id": 3, "nome": "Fazer ADO do professor de quinta", "data": "26/10/2017", "status": true },
-    { "id": 4, "nome": "Fazer Prova de EAD", "data": "11/08/2017", "status": false },
-    { "id": 5, "nome": "Dar banho no cachorro", "data": "02/11/2017", "status": false },
-    { "id": 6, "nome": "Entrega do PI", "data": "12/12/2017", "status": false },
-    { "id": 7, "nome": "Levar namorada no cinema", "data": "13/07/2017", "status": true },
-    { "id": 8, "nome": "Terminar o livro", "data": "10/10/2017", "status": false },
-    { "id": 9, "nome": "Fazer alguma coisa chata", "data": "30/11/2017" },
-    { "id": 10, "nome": "Fazer outra coisa chata", "data": "21/10/2017", "status": false }
-  ];
-
+  private tasks;
   private tasksOrdenado = [];
-  constructor(public navCtrl: NavController) {
+  private tabelaCarregada = false; // a tabela não aparece enquanto não fnalizar o carregamento
+  private addPage = AddTaskPage;
 
+  constructor(
+    public navCtrl: NavController,
+    private storage: Storage) {
+    this.tasks = [];
   }
 
-  ngOnInit(){
-    this.filtroPorPrazo();
+  ionViewDidEnter() {
+    this.tasks = [];
+    this.getAllTasks();
   }
+
+  getAllTasks() {
+    console.log("buscando registros");
+    this.tasks = [];
+    this.storage.get('tasks').then((val) => {
+      if (val != null) {
+        this.tasks = val;
+      } else {
+        this.tasks = [];
+      }
+      this.tabelaCarregada = true;
+      console.log(this.tasks);
+    });
+  }
+
+  selecionaTarefa(id : number){
+    console.log(id);
+    
+    this.navCtrl.push(AddTaskPage, {
+      id: id
+    });
+  }
+
+  addTask() {
+    this.navCtrl.push('AddTaskPage');
+  }
+
+  editTask(id: number) {
+    
+  }
+
+
 
   filtroPorFeito() {
+    this.tasks = this.storage.get('tasks');
+
     this.tipoFiltro = 'feito';
 
     let cont = 0;
@@ -39,7 +68,7 @@ export class AllTasksPage implements OnInit{
     // PEGA TODOS COM TRUE E ARMAZENA EM tasksOrdenado
     // POPULA O CONT
     for (let i = 0; i < this.tasks.length; i++) {
-      if(this.tasks[i]['status']){
+      if (this.tasks[i]['status']) {
         this.tasksOrdenado[cont] = this.tasks[i];
         this.tasks[i] = null;
         cont++;
@@ -61,8 +90,8 @@ export class AllTasksPage implements OnInit{
     for (let i = 0; i < this.tasks.length; i++) {
       let aux;
       for (let j = 0; j < this.tasks.length; j++) {
-        if(this.tasks[i] != null && this.tasks[j] != null){
-          if (this.converteData(this.tasks[i].data) < this.converteData(this.tasks[j].data)) {
+        if (this.tasks[i] != null && this.tasks[j] != null) {
+          if (this.converteData(this.tasks[i].dataPrazo) < this.converteData(this.tasks[j].dataPrazo)) {
             aux = this.tasks[i];
             this.tasks[i] = this.tasks[j];
             this.tasks[j] = aux;
@@ -72,24 +101,26 @@ export class AllTasksPage implements OnInit{
     }
 
     for (let i = 0; i < this.tasks.length; i++) {
-      if(this.tasks[i] != null){
+      if (this.tasks[i] != null) {
         this.tasksOrdenado[cont] = this.tasks[i];
         cont++;
       }
     }
 
     this.tasks = this.tasksOrdenado
-    this.tasksOrdenado= [];
-    
+    this.tasksOrdenado = [];
+
   }
 
   filtroPorPrazo() {
+
+    this.tasks = this.storage.get('tasks');
     this.tipoFiltro = 'prazo';
 
     for (let i = 0; i < this.tasks.length; i++) {
       let aux;
       for (let j = 0; j < this.tasks.length; j++) {
-        if (this.converteData(this.tasks[i].data) < this.converteData(this.tasks[j].data)) {
+        if (this.converteData(this.tasks[i].dataPrazo) < this.converteData(this.tasks[j].dataPrazo)) {
           aux = this.tasks[i];
           this.tasks[i] = this.tasks[j];
           this.tasks[j] = aux;
@@ -99,13 +130,13 @@ export class AllTasksPage implements OnInit{
   }
 
   encontraData(data) {
-
-    let dia: string = data.substr(0, 2);
-    let mes: string = data.substr(3, 2);
-    let ano: string = data.substr(6);
+    let ano: string = data.substr(0, 4);
+    let mes: string = data.substr(5, 2);
+    let dia: string = data.substr(8);
     return [dia, mes, ano];
   }
 
+  // encontra mes e devolve em texto
   encontraMes(mes) {
     switch (mes) {
       case "01":
@@ -143,7 +174,58 @@ export class AllTasksPage implements OnInit{
     return data;
 
   }
+
+  // verifica se a data esta atrasada e status não está true
   verificaDataAtrasada(data, status: boolean) {
-    return data < new Date() && !status;
+    let dataAtual = new Date();
+    let dia = this.encontraData(data)[0];
+    let mes = this.encontraData(data)[1];
+    let ano = this.encontraData(data)[2];
+    
+    if (parseInt(ano) == dataAtual.getFullYear()) {
+      if (parseInt(mes) == (dataAtual.getMonth()+1)) {
+        return parseInt(dia) < dataAtual.getDate() && !status;
+      } else if (parseInt(mes) > (dataAtual.getMonth()+1)) {
+        return !status;
+      } else {
+        return false;
+      }
+    } else if (parseInt(ano) < dataAtual.getFullYear()) {
+      return !status;
+    } else {
+      return false;
+    }
+  }
+
+  /*  verificaDataAtrasada(data, status: boolean) {
+     let dataAtual = new Date;
+     let dia = this.converteData(data)[0];
+     let mes = this.converteData(data)[1]
+     let ano = this.converteData(data)[2];
+     console.log(dia, mes, ano);
+  */
+  /* 
+  let diaMenor: boolean = false;
+  let mesMenor: boolean = false;
+  let anoMenor: boolean = false;
+
+  anoMenor = data.getFullYear() < ano;
+  mesMenor = dataAtual.getMonth() < mes;
+  diaMenor = dataAtual.getDate() < dia;
+
+  console.log(dataAtual.getDate()); 
+
+  //let minhaData = ano + ""+ mes +""+ dia;
+
+}*/
+
+  pegarHora(h) {
+    let i = h.search(":");
+    return h.substr(0, i);
+  }
+
+  pegarMinuto(h) {
+    let i = h.search(":");
+    return h.substr(i + 1);
   }
 }
