@@ -32,8 +32,16 @@
     <tbody>
       <tr *ngFor="let task of tasks" (click)="selecionaTarefa(task.id)">
         <td>
-          <ion-checkbox [checked]="task.status" disabled></ion-checkbox>
-        </td>
+          <!-- <ion-checkbox [checked]="task.status" disabled></ion-checkbox> -->
+          <ion-icon name="md-checkmark" *ngIf="task.status" class="finalizada"></ion-icon>
+          
+          <ng-container *ngIf="verificaDataAtrasada(task.dataPrazo,task.status); else elseicon">
+              <ion-icon name="md-close" class="atrasada"></ion-icon>
+          </ng-container>
+          <ng-template #elseicon>
+              <ion-icon name="ios-warning-outline" *ngIf="!task.status" class="atencao"></ion-icon>
+          </ng-template>
+          
         <td>
           <div></div>
           <ng-container *ngIf="verificaDataAtrasada(task.dataPrazo,task.status); else elseTemplate">

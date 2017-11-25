@@ -1,6 +1,7 @@
 $bg-vermelho : #ea654f;
 $bg-cinza : #727272;
 $bg-verde : #98aa35;
+$bg-amarelo : #efc800;
 page-all-tasks {
     table{
         width: 100%;
@@ -129,4 +130,20 @@ page-all-tasks {
 
 .checkbox-md.checkbox-disabled, .item-md.item-checkbox-disabled, .checkbox-ios.checkbox-disabled, .item-ios.item-checkbox-disabled{
     opacity: 1;
+}
+
+.finalizada, .atrasada, .atencao{
+    font-size: 30px;
+}
+
+.finalizada{
+
+}
+
+.atrasada{
+    color: $bg-vermelho;
+}
+
+.atencao{
+    color: $bg-amarelo;
 }

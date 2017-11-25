@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding *ngIf="templateCarregado" >
+<ion-content padding *ngIf="templateCarregado">
   <ion-item>
     <ion-icon name="md-calendar" item-start></ion-icon>
     <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Data *" max="2030" [(ngModel)]="task.dataPrazo"></ion-datetime>
@@ -28,6 +28,11 @@
     <ion-label class="lbl-tarefa-concluida">Tarefa concluida ?</ion-label>
     <ion-checkbox [(ngModel)]="task.status"></ion-checkbox>
   </ion-item>
-  <button ion-button full (click)="verificaPreenchimento()">SALVAR</button>
+  <button ion-button full (click)="verificaPreenchimento()" *ngIf="task.id == 0">SALVAR</button>
+  <button ion-button icon-right (click)="mensagemDeletar()" *ngIf="task.id != 0" class="btn-excluir">
+    EXCLUIR
+  </button>
 
+  <button ion-button (click)="verificaPreenchimento()" *ngIf="task.id != 0" class="btn-editar">
+    SALVAR</button>
 </ion-content>

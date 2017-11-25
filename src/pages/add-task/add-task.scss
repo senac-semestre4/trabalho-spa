@@ -29,4 +29,14 @@ page-add-task {
     .button-ios, .button-md{
         background: #66731d;
     }
+
+    .btn-excluir{
+        background: #b34b3a;
+    }
+    .btn-editar{
+        float: right;
+    }
+    .btn-excluir, .btn-editar{
+        width: 45%;
+    }
 }
